@@ -1,8 +1,8 @@
 # Data-Structure
-Self-created classes for Data Structure
-including:\n
-  list
-  stack
-  queue
-  etc..
+Self-created classes for Data Structure<br>
+including:<br>
+  list<br>
+  stack<br>
+  queue<br>
+  etc..<br>
 platform: Codeblocks 17.02
