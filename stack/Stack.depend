@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1522319028 source:c:\users\victor\onedrive\study\data structure\project\stack\stack\main.cpp
+	"seqStack.h"
+	"linkStack.h"
+
+1522319028 c:\users\victor\onedrive\study\data structure\project\stack\stack\seqstack.h
+	"Stack.h"
+	"seqStack.cpp"
+
+1522319689 c:\users\victor\onedrive\study\data structure\project\stack\stack\stack.h
+	<iostream>
+	<cstdio>
+
+1522319028 c:\users\victor\onedrive\study\data structure\project\stack\stack\seqstack.cpp
+	"seqStack.h"
+
+1522319029 c:\users\victor\onedrive\study\data structure\project\stack\stack\linkstack.h
+	"Stack.h"
+	"linkStack.cpp"
+
+1522320331 c:\users\victor\onedrive\study\data structure\project\stack\stack\linkstack.cpp
+	"linkStack.h"
+
+1522319028 source:c:\users\victor\onedrive\study\data structure\project\stack\stack\seqstack.cpp
+	"seqStack.h"
+

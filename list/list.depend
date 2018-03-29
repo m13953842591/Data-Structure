@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1522308325 source:c:\users\victor\onedrive\study\data structure\project\list\list\main.cpp
+	<iostream>
+	"seqList.h"
+	"linkList.h"
+
+1522307581 c:\users\victor\onedrive\study\data structure\project\list\linklist.h
+	"list.h"
+	<iostream>
+	"linkList.cpp"
+
+1522078168 c:\users\victor\onedrive\study\data structure\project\list\list.h
+
+1522307594 c:\users\victor\onedrive\study\data structure\project\list\seqlist.h
+	"list.h"
+	<iostream>
+	"seqList.cpp"
+
+1522307699 c:\users\victor\onedrive\study\data structure\project\list\linklist.cpp
+	<iostream>
+	".../linkList.h"
+
+1522307699 c:\users\victor\onedrive\study\data structure\project\list\seqlist.cpp
+	<iostream>
+	".../seqList.h"
+
+1522308445 c:\users\victor\onedrive\study\data structure\project\list\list\seqlist.h
+	"list.h"
+	<iostream>
+	"seqList.cpp"
+
+1522078168 c:\users\victor\onedrive\study\data structure\project\list\list\list.h
+
+1522308446 c:\users\victor\onedrive\study\data structure\project\list\list\linklist.h
+	"list.h"
+	"linkList.cpp"
+
+1522308153 source:c:\users\victor\onedrive\study\data structure\project\list\list\linklist.cpp
+	<iostream>
+	"linkList.h"
+
+1522308218 source:c:\users\victor\onedrive\study\data structure\project\list\list\seqlist.cpp
+	<iostream>
+	"seqList.h"
+
+1522308153 c:\users\victor\onedrive\study\data structure\project\list\list\linklist.cpp
+	<iostream>
+	"linkList.h"
+
+1522308553 c:\users\victor\onedrive\study\data structure\project\list\list\seqlist.cpp
+	<iostream>
+	"seqList.h"
+

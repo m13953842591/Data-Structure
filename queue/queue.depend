@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1522066268 source:c:\users\victor\onedrive\study\data structure\project\queue\queue\main.cpp
+	<iostream>
+	"../linkQueue.h"
+	"../seqQueue.h"
+
+1522321099 c:\users\victor\onedrive\study\data structure\project\queue\queue.h
+	<iostream>
+	<cstdio>
+
+1522062317 c:\users\victor\onedrive\study\data structure\project\queue\queue\test.h
+
+1522062340 source:c:\users\victor\onedrive\study\data structure\project\queue\queue\test.cpp
+	"test.h"
+
+1522321820 c:\users\victor\onedrive\study\data structure\project\queue\linkqueue.h
+	"Queue.h"
+	"linkQueue.cpp"
+
+1522321099 c:\users\victor\onedrive\study\data structure\project\queue\seqqueue.h
+	"Queue.h"
+	"seqQueue.cpp"
+
+1522321099 source:c:\users\victor\onedrive\study\data structure\project\queue\seqqueue.cpp
+	"seqQueue.h"
+
+1522320934 source:c:\users\victor\onedrive\study\data structure\project\queue\linkqueue.cpp
+	"linkQueue.h"
+
+1522061408 source:c:\users\victor\onedrive\study\data structure\project\queue\queue.h
+
+1522066175 source:c:\users\victor\onedrive\study\data structure\project\queue\linkqueue.h
+	"Queue.h"
+	<iostream>
+
+1522066038 source:c:\users\victor\onedrive\study\data structure\project\queue\seqqueue.h
+	"Queue.h"
+
+1522322239 c:\users\victor\onedrive\study\data structure\project\queue\linkqueue.cpp
+	"linkQueue.h"
+
+1522321147 source:c:\users\victor\onedrive\study\data structure\project\queue\main.cpp
+	"seqQueue.h"
+	"linkQueue.h"
+
+1522321099 c:\users\victor\onedrive\study\data structure\project\queue\seqqueue.cpp
+	"seqQueue.h"
+
