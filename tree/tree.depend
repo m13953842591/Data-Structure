@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1522321099 source:c:\users\victor\documents\github\data-structure\tree\seqqueue.cpp
+	"seqQueue.h"
+
+1523105375 c:\users\victor\documents\github\data-structure\tree\seqqueue.h
+	<iostream>
+	<cstdio>
+	"seqQueue.cpp"
+
+1522321099 c:\users\victor\documents\github\data-structure\tree\seqqueue.cpp
+	"seqQueue.h"
+
+1523106521 source:c:\users\victor\documents\github\data-structure\tree\binarytree.cpp
+	"binaryTree.h"
+	"seqQueue.h"
+
+1523106875 c:\users\victor\documents\github\data-structure\tree\binarytree.h
+	<iostream>
+	"binaryTree.cpp"
+
+1523106521 c:\users\victor\documents\github\data-structure\tree\binarytree.cpp
+	"binaryTree.h"
+	"seqQueue.h"
+
+1523106724 source:c:\users\victor\documents\github\data-structure\tree\main.cpp
+	"binaryTree.h"
+

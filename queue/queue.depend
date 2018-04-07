@@ -46,3 +46,32 @@
 1522321099 c:\users\victor\onedrive\study\data structure\project\queue\seqqueue.cpp
 	"seqQueue.h"
 
+1522322239 source:c:\users\victor\documents\github\data-structure\queue\linkqueue.cpp
+	"linkQueue.h"
+
+1522321820 c:\users\victor\documents\github\data-structure\queue\linkqueue.h
+	"Queue.h"
+	"linkQueue.cpp"
+
+1522321099 c:\users\victor\documents\github\data-structure\queue\queue.h
+	<iostream>
+	<cstdio>
+
+1522322239 c:\users\victor\documents\github\data-structure\queue\linkqueue.cpp
+	"linkQueue.h"
+
+1522321099 source:c:\users\victor\documents\github\data-structure\queue\seqqueue.cpp
+	"seqQueue.h"
+
+1522321099 c:\users\victor\documents\github\data-structure\queue\seqqueue.h
+	"Queue.h"
+	"seqQueue.cpp"
+
+1522321099 c:\users\victor\documents\github\data-structure\queue\seqqueue.cpp
+	"seqQueue.h"
+
+1522463091 source:c:\users\victor\documents\github\data-structure\queue\main.cpp
+	"seqQueue.h"
+	"linkQueue.h"
+	<iomanip>
+
