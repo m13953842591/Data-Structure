@@ -32,8 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="binaryTree.cpp" />
 		<Unit filename="binaryTree.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="seqQueue.cpp" />
+		<Unit filename="seqQueue.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
