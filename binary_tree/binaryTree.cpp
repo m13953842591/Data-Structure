@@ -56,8 +56,8 @@ template<class Type>
 void binaryTree<Type>::postOrder( Node *t )  const
 {
 	if(t == NULL) return;
-	preOrder(t->left);
-	preOrder(t->right);
+	postOrder(t->left);
+	postOrder(t->right);
 	cout << t->data << ' ';
 }
 
@@ -65,9 +65,9 @@ template<class Type>
 void binaryTree<Type>::midOrder( Node *t ) const
 {
 	if(t == NULL) return;
-	preOrder(t->left);
+	midOrder(t->left);
 	cout << t->data << ' ';
-	preOrder(t->right);
+	midOrder(t->right);
 }
 
 template<class Type>

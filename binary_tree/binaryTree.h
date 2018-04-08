@@ -69,17 +69,17 @@ public:
 	}
 
 	void preOrder() const{
-	    cout << "preOrder traversal: "
+	    cout << "preOrder traversal: ";
 	    preOrder(root);
 	    cout << endl;
     }
     void midOrder() const{
-	    cout << "midOrder traversal: "
+	    cout << "midOrder traversal: ";
 	    midOrder(root);
 	    cout << endl;
     }
 	void postOrder() const{
-	    cout << "postOrder traversal: "
+	    cout << "postOrder traversal: ";
 	    postOrder(root);
 	    cout << endl;
     }
