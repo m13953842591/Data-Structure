@@ -25,3 +25,31 @@
 1523106724 source:c:\users\victor\documents\github\data-structure\tree\main.cpp
 	"binaryTree.h"
 
+1522321099 source:c:\users\victor\documents\github\data-structure\queue\seqqueue.cpp
+	"seqQueue.h"
+
+1522321099 c:\users\victor\documents\github\data-structure\queue\seqqueue.h
+	"Queue.h"
+	"seqQueue.cpp"
+
+1522321099 c:\users\victor\documents\github\data-structure\queue\queue.h
+	<iostream>
+	<cstdio>
+
+1522321099 c:\users\victor\documents\github\data-structure\queue\seqqueue.cpp
+	"seqQueue.h"
+
+1522319028 source:c:\users\victor\documents\github\data-structure\stack\seqstack.cpp
+	"seqStack.h"
+
+1522319028 c:\users\victor\documents\github\data-structure\stack\seqstack.h
+	"Stack.h"
+	"seqStack.cpp"
+
+1522319689 c:\users\victor\documents\github\data-structure\stack\stack.h
+	<iostream>
+	<cstdio>
+
+1522319028 c:\users\victor\documents\github\data-structure\stack\seqstack.cpp
+	"seqStack.h"
+

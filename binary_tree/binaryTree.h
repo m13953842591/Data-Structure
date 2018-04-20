@@ -1,6 +1,8 @@
 #ifndef BINARYTREE_H_INCLUDED
 #define BINARYTREE_H_INCLUDED
 #include <iostream>
+#include "../queue/seqQueue.h"
+#include "../stack/seqStack.h"
 using namespace std;
 
 template <class Type>
@@ -67,22 +69,9 @@ public:
 		if(root != NULL) clear(root);
 		root = NULL;
 	}
-
-	void preOrder() const{
-	    cout << "preOrder traversal: ";
-	    preOrder(root);
-	    cout << endl;
-    }
-    void midOrder() const{
-	    cout << "midOrder traversal: ";
-	    midOrder(root);
-	    cout << endl;
-    }
-	void postOrder() const{
-	    cout << "postOrder traversal: ";
-	    postOrder(root);
-	    cout << endl;
-    }
+	void preOrder() const;
+	void midOrder() const;
+	void postOrder() const;
 	void createTree(Type flag);
 	void createTreeRecursivly(Type flag){
 		clear(root);

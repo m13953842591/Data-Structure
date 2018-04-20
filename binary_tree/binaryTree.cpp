@@ -1,7 +1,8 @@
 #ifndef BINARYTREE_CPP_INCLUDED
 #define BINARYTREE_CPP_INCLUDED
 #include "binaryTree.h"
-#include "seqQueue.h"
+#include "../stack/seqStack.h"
+#include "../queue/seqQueue.h"
 template<class Type>
 void binaryTree<Type>::createTreeRecursivly(Node *t, Type flag)const
 {
@@ -52,6 +53,7 @@ void binaryTree<Type>::preOrder( Node *t )  const
 	preOrder(t->right);
 }
 
+
 template<class Type>
 void binaryTree<Type>::postOrder( Node *t )  const
 {
@@ -97,5 +99,78 @@ void binaryTree<Type>::createTree(Type flag)
 	}
 	cout << "create completed!\n";
 }
+// traverse binaryTree recursively
+/*template<class Type>
+void binaryTree<Type>::preOrder() const{
+    cout << "preOrder traversal: ";
+    preOrder(root);
+    cout << endl;
+}
+template<class Type>
+void binaryTree<Type>::midOrder() const{
+    cout << "midOrder traversal: ";
+    midOrder(root);
+    cout << endl;
+}
+template<class Type>
+void binaryTree<Type>::postOrder() const{
+    cout << "postOrder traversal: ";
+    postOrder(root);
+    cout << endl;
+}*/
 
+// traverse binaryTree unrecursively
+template<class Type>
+void binaryTree<Type>::preOrder() const{
+	seqStack<Node*> s;
+	Node *tmp;
+	if(root == NULL) return;
+	s.push(root);
+	while(!s.isEmpty()){
+		tmp = s.pop();
+		cout << s->data << ' ';
+		if(tmp->right != NULL) s.push(tmp->right);
+		if(tmp->left != NULL) s.push(tmp->left);
+	}
+}
+
+template<class Type>
+void binaryTree<Type>::midOrder() const{
+	seqstack<Node *> s;
+	Node *tmp;
+	if(root == NULL) return;
+	tmp = root;
+	while(tmp) {s.push(tmp); tmp = tmp->left;}
+	while(!s.isEmpty()){
+		tmp = s.pop();
+		cout << s->data << ' ';
+		tmp = tmp->right;
+		while(tmp) {s.push(tmp); tmp = tmp->left;}
+	}
+}
+
+template<class Type>
+void binaryTree<Type>::postOrder() const{
+   	seqstack<Node *> s; seqstack<int> f;
+	Node *tmp;
+	int flag, noChildVisited = 0, oneChildVisited = 1, twoChildVisited = 2;
+	if(root == NULL) return;
+	s.push(root); f.push(noChildVisited);
+	while(!s.isEmpty()){
+		tmp = s.pop(); flag = f.pop();
+		switch(flag){
+			case 0: s.push(tmp); f.push(oneChildVisited);
+					if(tmp->left != NULL){
+						s.push(tmp->left); f.push(noChildVisited);
+					}
+					break;
+			case 1: s.push(tmp); f.push(twoChildVisited);
+					if(tmp->right != NULL){
+						s.push(tmp->right); f.push(noChildVisited);
+					}
+					break;
+			case 3: cout << tmp->data << ' ';
+		}
+	}
+}
 #endif //BINARYTREE_CPP_INCLUDED
