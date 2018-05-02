@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1524751842 source:d:\victor\documents\github\data-structure\priorityqueue\priorityqueue.cpp
+	"priorityQueue.h"
+
+1524751843 d:\victor\documents\github\data-structure\priorityqueue\priorityqueue.h
+	<iostream>
+	"priorityQueue.cpp"
+
+1524751842 d:\victor\documents\github\data-structure\priorityqueue\priorityqueue.cpp
+	"priorityQueue.h"
+

@@ -17,9 +17,9 @@ hfTree<Type>::hfTree(const Type *d, const int *w, int size)
 		elem[i].parent = elem[i].left = elem[i].right = 0;
 	}
 
-	for (int i = size - 1; i > 0; ++i)
+	for (int i = size - 1; i > 0; --i)
 	{
-		min2 = min1 = INT_MAX;
+		min2 = min1 = MAX_INT;
 		x = y = 0;
 		for (int j = i + 1; j < length; ++j)
 		{

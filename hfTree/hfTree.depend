@@ -18,3 +18,17 @@
 1524193954 source:c:\users\victor\documents\github\data-structure\hftree\main.cpp
 	"hfTree.h"
 
+1524198639 source:d:\victor\documents\github\data-structure\hftree\main.cpp
+	"hfTree.h"
+
+1524197141 d:\victor\documents\github\data-structure\hftree\hftree.h
+	<iostream>
+	<string>
+	"hfTree.cpp"
+
+1524198628 d:\victor\documents\github\data-structure\hftree\hftree.cpp
+	"hfTree.h"
+
+1524198628 source:d:\victor\documents\github\data-structure\hftree\hftree.cpp
+	"hfTree.h"
+
