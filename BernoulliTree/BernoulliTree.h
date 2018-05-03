@@ -19,6 +19,8 @@ class BernoulliTree
     Node **headers;
     int size;
     void clear(Node *n);
+    void copy(Node *n, Node *&res);
+    void mergeNodes(Node * n1, Node * n2, Node *&res);
     void merge(Node **h1, int size1, Node **h2, int size2, Node **&resHeaders, int &resSize);
     void clearHeaders()
     {
@@ -26,7 +28,7 @@ class BernoulliTree
             clear(headers[i]);
         delete[] headers;
     }
-    Node* copy(Node *n);
+    
 
   public:
     BernoulliTree():headers(NULL), size(0) {}
@@ -37,11 +39,11 @@ class BernoulliTree
         headers = new Node *[1];
         headers[0] = new Node(x);
     }
-    void mergeTrees(const BernoulliTree<Type> &b1, const BernoulliTree<Type> &b2)
+    void mergeTree(const BernoulliTree<Type> &bt)
     {
-        Node **resHeader;
-        int resSize;
-        merge(b1.headers, b1.size, b2.headers, b2.size, resHeader, resSize);
+        Node **resHeader = NULL;
+        int resSize = 0;
+        merge(headers, size, bt.headers, bt.size, resHeader, resSize);
         clearHeaders();
         headers = resHeader;
         size = resSize;

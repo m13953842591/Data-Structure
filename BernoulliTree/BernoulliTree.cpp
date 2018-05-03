@@ -1,173 +1,101 @@
 #ifndef BERNOULLITREE_CPP_INCLUDED
 #define BERNOULLITREE_CPP_INCLUDED
 #include "BernoulliTree.h"
+
+// Notice in "mergeNodes" and "copy" function
+// we don't care the previous value of "res" , which means it may cause
+// memory leak, so be careful using it, we recommend you create a variable
+// to catch the previous value of "res" at first, or just to clear the res
+// using "clear(res);"
+
+template <class Type>
+void BernoulliTree<Type>::mergeNodes(Node *n1, Node *n2, Node *&res)
+{
+    
+    if (n1 == NULL || n2 == NULL)
+    {
+        res = NULL;
+        return;
+    }
+    if (n1->data > n2->data)
+    {
+        n2->right = n1;
+        copy(n2, res);
+    }
+    else
+    {
+        n1->right = n2;
+        copy(n1, res);
+    }
+}
+
 template <class Type>
 void BernoulliTree<Type>::merge(Node **h1, int size1, Node **h2, int size2, Node **&resHeaders, int &resSize)
 {
     resSize = max(size1, size2) + 1;
     resHeaders = new Node *[resSize];
-    BernoulliTree<Type>::Node **hLarger, **hSmaller, **bcp1 = NULL, **bcp2 = NULL;
-    BernoulliTree<Type>::Node *carry = NULL, *op1, *op2, *opb, *ops; //operands
-    int i = 0;
-
-    // first we make two copies of these two Bernoulli trees's headers
-    if(size1 > 0)
+    BernoulliTree<Type>::Node *carry = NULL, tmp = NULL;
+    int i = 0, cond;
+    //determine which kind of case
+    while (i < resSize - 1)
     {
-        bcp1 = new Node *[size1];
-        for (int ii = 0; ii < size1; ii++)
-            bcp1[ii] = copy(h1[ii]);
-    }
-    if(size2 > 0)
-    {
-        bcp2 = new Node *[size2];
-        for (int ii = 0; ii < size1; ii++)
-            bcp2[ii] = copy(h2[ii]);
-    }
-
-
-    // then we determine which headers are larger, which is smaller
-    if (size1 < size2)
-    {
-        hSmaller = bcp1; //hLarger means "headers with larger size"
-        hLarger = bcp2; // hSmaller means "headers with smaller size",
-    }
-    else
-    {
-        hSmaller = bcp2;
-        hLarger = bcp1;
-    }
-
-    while (i < size1 && i < size2)
-    {
-        //step 1:
-        //determine op1 and op2, in here we first consider op1, then op2;
-        op1 = op2 = NULL;
-        resHeaders[i] = NULL;
-        if (carry != NULL)
-            op1 = carry;
-        if (h1[i] != NULL)
-        {
-            if (op1 == NULL)
-                op1 = h1[i];
-            else
-                op2 = h1[i];
-        }
-        if (h2[i] != NULL)
-        {
-            if (op1 == NULL)
-                op1 = h2[i];
-            else if (op2 == NULL)
-                op2 = h2[i];
-        }
-
+        if (h1[i] != NULL && p2[i] != NULL && carry != NULL)
+            cond = 1;
+        else if (h1[i] != NULL && h2[i] != NULL && carry == NULL)
+            cond = 2;
+        else if (h1[i] != NULL && h2[i] == NULL && carry != NULL)
+            cond = 3;
+        else if (h1[i] == NULL && h2[i] != NULL && carry != NULL)
+            cond = 4;
+        else if (h1[i] != NULL && h2[i] == NULL && carry == NULL)
+            cond = 5;
+        else if (h1[i] == NULL && h2[i] != NULL && carry == NULL)
+            cond = 6;
+        else
+            cond = 7;
         // step 2:
         // determine headers[i] and carry, we solve this problem in two cases
         // case 1: in this case there is no need to merge!
-        if (op1 == NULL || op2 == NULL)
-        {
-            if (op1 != NULL)
-                resHeaders[i] = op1;
-            else
-                resHeaders[i] = NULL; // op1 is NULL, op2 definitely will be NULL
-            carry = NULL;
-            i++;
-            continue;
-        }
-        // case 2:
-        // in case 2, we first determine resHeaders[i]
-        if (carry != NULL && h1[i] != NULL && h2[i] != NULL)
-            // then op1 must be carry, and op2 must be h1[i]
-            resHeaders[i] = h2[i];
-        else
-            // there is only two of carry, h1[i] and h2[i] that are not NULL
-            resHeaders[i] = NULL;
-
-        // merge two header and get carry
-        if (op1->data > op2->data)
-        {
-            opb = op1; // opb means operand with bigger data
-            ops = op2; // ops means operand with smaller data
-        }
-        else
-        {
-            opb = op2;
-            ops = op1;
-        }
-
-        carry = ops;
-        ops = ops->left;
-        if (ops == NULL)
-            carry->left = opb;
-        else
-        {
-            while (ops->right != NULL)
-                ops = ops->right;
-            ops->right = op1;
-        }
-        i++;
-    }
-
-    // merge the rest headers
-    while (i < resSize - 1)
-    {
         resHeaders[i] = NULL;
-        // case 1
-        if (hLarger[i] == NULL && carry == NULL)
-            resHeaders[i] = carry = NULL;
-
-        // case 2
-        else if (hLarger[i] != NULL && carry != NULL)
+        switch (cond)
         {
-            resHeaders[i] = NULL;
-
-            if (hLarger[i]->data > carry->data)
-            {
-                opb = hLarger[i];
-                ops = carry;
-            }
-            else
-            {
-                opb = carry;
-                ops = hLarger[i];
-            }
-
-            carry = ops;
-            ops = ops->left;
-            if (ops == NULL)
-                carry->left = opb;
-            else
-            {
-                while (ops->right != NULL)
-                    ops = ops->right;
-                ops->right = op1;
-            }
+        case 1:
+            resHeaders[i] = carry;
+        case 2: //carry is NULL
+            mergeNodes(h1[i], h2[i], carry);
+            break;
+        case 3: //h2[i] is NULL
+            tmp = carry;
+            mergeNodes(h1[i], tmp, carry);
+            clear(tmp);
+            break;
+        case 4: //h1[i] is NULL
+            tmp = carry;
+            mergeNodes(h2[i], tmp, carry);
+            clear(tmp);
+            break;
+        case 5: //only h1[i] is not NULL
+            copy(h1[i], carry);
+            break;
+        case 6: //only h2[i] is not NULL
+            copy(h2[i], carry);
+        default:
+            break;
         }
-        // case 3 and 4
-        else
-        {
-            if (hLarger[i] != NULL) // then carry == NULL
-                resHeaders[i] = hLarger[i];
-            else // then hLarger[i] == NULL
-                resHeaders[i] = carry;
-            carry = NULL;
-        }
-        i++;
     }
-    resHeaders[i] = carry;
+    resHeaders[resSize - 1] = carry;
 }
 
 template <class Type>
-typename BernoulliTree<Type>::Node* BernoulliTree<Type>::copy(BernoulliTree<Type>::Node *n)
+void BernoulliTree<Type>::copy(Node *n, Node *&res)
 {
-    Node *cp = NULL;
-    if (n != NULL)
-    {
-        cp = new Node(n->data);
-        cp->left = copy(n->left);
-        cp->right = copy(n->right);
-    }
-    return cp;
+    if (n == NULL)
+        return;
+    res = new Node(n->data);
+    copy(n->left, res->left);
+    copy(n->right, res->right);
 }
+
 template <class Type>
 void BernoulliTree<Type>::clear(Node *n)
 {
@@ -181,18 +109,8 @@ void BernoulliTree<Type>::clear(Node *n)
 template <class Type>
 void BernoulliTree<Type>::enQueue(const Type &x)
 {
-    cout << 2.1 << endl;
     BernoulliTree<Type> tmp(x);
-    cout << 2.2 << endl;
-    Node **resHeader;
-    int resSize;
-    cout << 2.3 << endl;
-    merge(tmp.headers, tmp.size, headers, size, resHeader, resSize);
-    cout << 2.4 << endl;
-    clearHeaders();
-    cout << 2.5 << endl;
-    headers = resHeader;
-    size = resSize;
+    mergeTree(tmp);
 }
 
 template <class Type>
@@ -211,21 +129,18 @@ Type BernoulliTree<Type>::deQueue()
         delete headers[0];
         return res;
     }
-    BernoulliTree<Type>::Node **newHeaders = new Node *[min];
-    BernoulliTree<Type>::Node *tmp = headers[min]->left;
+    BernoulliTree<Type>::Node **tmpHeaders = new Node *[min];
+    BernoulliTree<Type>::Node *tmpNode = headers[min]->left;
     for (int i = 0; i < min; i++)
     {
-        newHeaders[i] = tmp;
-        tmp = tmp->right;
+        tmpHeaders[i] = tmpNode;
+        tmpNode = tmpNode->right;
     }
     delete headers[min];
+    
     //merge
-    BernoulliTree<Type>::Node **resHeaders;
-    int resSize;
-    merge(newHeaders, min, headers, size, resHeaders, resSize);
-    clearHeaders();
-    headers = resHeaders;
-    size = resSize;
+    BernoulliTree<Type> tmp(tmpHeaders, min);
+    mergeTree(tmp);
     return res;
 }
 
