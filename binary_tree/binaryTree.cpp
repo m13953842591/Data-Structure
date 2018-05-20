@@ -169,7 +169,7 @@ void binaryTree<Type>::postOrder() const{
 						s.push(tmp->right); f.push(noChildVisited);
 					}
 					break;
-			case 3: cout << tmp->data << ' ';
+			case 2: cout << tmp->data << ' ';
 		}
 	}
 }

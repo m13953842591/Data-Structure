@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1525858132 source:d:\victor\documents\github\data-structure\binarysearchtree\binarysearchtree.cpp
+	"BinarySearchTree.h"
+
+1525857848 d:\victor\documents\github\data-structure\binarysearchtree\binarysearchtree.h
+	<iostream>
+	"BinarySearchTree.cpp"
+
+1525858132 d:\victor\documents\github\data-structure\binarysearchtree\binarysearchtree.cpp
+	"BinarySearchTree.h"
+

@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1526289180 source:d:\victor\documents\github\data-structure\adjmatrixgraph\adjmatrixgraph.cpp
+	"AdjMatrixGraph.h"
+
+1526289079 d:\victor\documents\github\data-structure\adjmatrixgraph\adjmatrixgraph.h
+	<iostream>
+	"AdjMatrixGraph.cpp"
+
+1526289180 d:\victor\documents\github\data-structure\adjmatrixgraph\adjmatrixgraph.cpp
+	"AdjMatrixGraph.h"
+

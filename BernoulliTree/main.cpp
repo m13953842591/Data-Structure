@@ -2,13 +2,16 @@
 
 int main()
 {
-    int x[5] = {1,2,3,4,5};
-    cout << 1 << endl;
-    BernoulliTree<int> b1;
-    cout << 2 << endl;
-    for(int i = 0; i < 5; i++) b1.enQueue(x[i]);
-    cout << 3 << endl;
-    for(int i = 0; i < 5; i++) cout << b1.deQueue() << endl;
-    cout << 4 << endl;
+/*     int x[5] = {5,4,3,2,1};
+    BernoulliTree<int> b;
+    for(int i = 0; i < 5; i++)
+        b.enQueue(x[i]); */
+    int x = 1;
+    int y = 2;
+    BernoulliTree<int> b;
+    b.enQueue(y);
+    b.enQueue(x);
+    cout << b.deQueue() << endl;
+    cout << b.deQueue() << endl;
     return 0;
 }

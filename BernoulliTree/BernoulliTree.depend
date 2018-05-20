@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1525494982 source:d:\victor\documents\github\data-structure\bernoullitree\bernoullitree.cpp
+	"BernoulliTree.h"
+
+1525491699 d:\victor\documents\github\data-structure\bernoullitree\bernoullitree.h
+	<iostream>
+	"BernoulliTree.cpp"
+
+1525495192 d:\victor\documents\github\data-structure\bernoullitree\bernoullitree.cpp
+	"BernoulliTree.h"
+
+1525492259 source:d:\victor\documents\github\data-structure\bernoullitree\main.cpp
+	"BernoulliTree.h"
+
