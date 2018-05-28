@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1527211348 source:d:\victor\documents\github\data-structure\adjlistgraph\adjlistgraph.cpp
+	"adjListGraph.h"
+
+1527211485 d:\victor\documents\github\data-structure\adjlistgraph\adjlistgraph.h
+	<iostream>
+	<stack>
+	<queue>
+	"adjListGraph.cpp"
+
+1527211348 d:\victor\documents\github\data-structure\adjlistgraph\adjlistgraph.cpp
+	"adjListGraph.h"
+
+1527211084 source:d:\victor\documents\github\data-structure\adjlistgraph\main.cpp
+	"adjListGraph.h"
+

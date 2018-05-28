@@ -15,7 +15,7 @@ private:
 	void doubleSpace();
 	void buildHeap();
 	void percolateDown(int hole);
-
+	void percolateUp(int hole);
 public:
 	priorityQueue(int capacity = 100)
 	{
@@ -29,7 +29,6 @@ public:
 	void enQueue(const Type &x);
 	Type deQueue();
 	Type getHead(){return array[1];}
-	
 };
 
 #include "priorityQueue.cpp"

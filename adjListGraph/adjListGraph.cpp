@@ -1,9 +1,22 @@
 #ifndef ADJLISTGRAPH_CPP_INCLUDED
 #define ADJLISTGRAPH_CPP_INCLUDED
 #include "adjListGraph.h"
+template <class TypeOfVer, class TypeOfEdge>
+void adjListGraph<TypeOfVer, TypeOfEdge>::dfs(int v, bool visited[]) const
+{
+    cout << verList[v].value << '\t';
+    visited[v] = true;
+    edgeNode *tmp = verList[v].head;
+    while (tmp != NULL)
+    {
+        if (visited[tmp->end] == false)
+            dfs(tmp->end, visited);
+        tmp = tmp->next;
+    }
+}
 
-template <class TypeOfNode, class TypeOfEdge>
-adjListGraph<TypeOfNode, TypeOfEdge>::adjListGraph(const TypeOfVer vers[], int vSize)
+template <class TypeOfVer, class TypeOfEdge>
+adjListGraph<TypeOfVer, TypeOfEdge>::adjListGraph(const TypeOfVer vers[], int vSize)
 {
     verList = new verNode[vSize];
     for (int i = 0; i < vSize; i++)
@@ -13,33 +26,58 @@ adjListGraph<TypeOfNode, TypeOfEdge>::adjListGraph(const TypeOfVer vers[], int v
     Vers = vSize;
     Edges = 0;
 }
-template <class TypeOfNode, class TypeOfEdge>
-bool adjListGraph<TypeOfNode, TypeOfEdge>::exist(int u, int v) const
+
+template <class TypeOfVer, class TypeOfEdge>
+bool adjListGraph<TypeOfVer, TypeOfEdge>::exist(int u, int v) const
 {
     if (u < 0 || u >= Vers || v < 0 || v >= Vers)
         return false;
-    verNode *tmp = verList[u].head;
+    edgeNode *tmp = verList[u].head;
     while (tmp != NULL && tmp->end != v)
         tmp = tmp->next;
     if (tmp == NULL)
         return false;
     return true;
 }
-template <class TypeOfNode, class TypeOfEdge>
-bool adjListGraph<TypeOfNode, TypeOfEdge>::insert(int u, int v, TypeOfEdge w)
+
+template <class TypeOfVer, class TypeOfEdge>
+bool adjListGraph<TypeOfVer, TypeOfEdge>::insert(int u, int v, TypeOfEdge w)
 {
     if (u < 0 || u >= Vers || v < 0 || v >= Vers)
         return false;
-    verNode *tmp = verList[u].head;
+    edgeNode *tmp = verList[u].head;
     while (tmp != NULL && tmp->end != v)
         tmp = tmp->next;
     if (tmp != NULL)
         return false;
     verList[u].head = new edgeNode(v, w, verList[u].head);
     ++Edges;
+    return true;
 }
-template <class TypeOfNode, class TypeOfEdge>
-void adjListGraph<TypeOfNode, TypeOfEdge>::remove(const TypeOfNode &n)
+template <class TypeOfVer, class TypeOfEdge>
+bool adjListGraph<TypeOfVer, TypeOfEdge>::remove(int u, int v)
+{
+    edgeNode *p = verList[u].head, *q = NULL;
+
+    while (p != NULL && p->end != v)
+    {
+        q = p;
+        p = p->next;
+    }
+    if (p == NULL)
+        return false;
+
+    if (q == NULL)
+        verList[u].head = p->next;
+    else
+        q->next = p->next;
+    delete p;
+    Edges--;
+    return true;
+}
+
+template <class TypeOfVer, class TypeOfEdge>
+void adjListGraph<TypeOfVer, TypeOfEdge>::remove(const TypeOfVer &n)
 {
     //5 steps:
     //1.找到节点对应的下标i
@@ -100,19 +138,70 @@ void adjListGraph<TypeOfNode, TypeOfEdge>::remove(const TypeOfNode &n)
     }
 
     Vers = Vers - 1;
-    Edges = Edges - cnt;//有向图
+    Edges = Edges - cnt; //有向图
 }
-template <class TypeOfNode, class TypeOfEdge>
-void adjListGraph<TypeOfNode, TypeOfEdge>::dfs()
+
+template <class TypeOfVer, class TypeOfEdge>
+void adjListGraph<TypeOfVer, TypeOfEdge>::dfs() const
 {
-    
+    bool *visited = new bool[Vers];
+
+    for (int i = 0; i < Vers; i++)
+    {
+        visited[i] = false;
+    }
+
+    for (int i = 0; i < Vers; i++)
+    {
+        if (visited[i]) continue;
+        dfs(i, visited);
+        cout << endl;
+    }
 }
-template <class TypeOfNode, class TypeOfEdge>
-void adjListGraph<TypeOfNode, TypeOfEdge>::bfs();
-template <class TypeOfNode, class TypeOfEdge>
-adjListGraph<TypeOfNode, TypeOfEdge>::~adjListGraph()
+
+template <class TypeOfVer, class TypeOfEdge>
+void adjListGraph<TypeOfVer, TypeOfEdge>::bfs() const
 {
-    edgeNode *tmp for (int i = 0; i < Vers; i++)
+    bool *visited = new bool[Vers];
+    queue<int> q;
+    int v;
+    edgeNode *tmp;
+    for (int i = 0; i < Vers; i++)
+    {
+        visited[i] = false;
+    }
+
+    for (int i = 0; i < Vers; i++)
+    {
+        if (visited[i])
+            continue;
+        q.push(i);
+        while (!q.empty())
+        {
+            v = q.front();
+            q.pop();
+            if (visited[v])
+                continue;
+            cout << verList[v].value << '\t';
+            visited[v] = true;
+            tmp = verList[v].head;
+            while (tmp != NULL)
+            {
+                if (visited[tmp->end] == false)
+                {
+                    q.push(tmp->end);
+                }
+                tmp = tmp->next;
+            }
+        }
+        cout << endl;
+    }
+}
+template <class TypeOfVer, class TypeOfEdge>
+adjListGraph<TypeOfVer, TypeOfEdge>::~adjListGraph()
+{
+    edgeNode *tmp;
+    for (int i = 0; i < Vers; i++)
     {
         while ((tmp = verList[i].head) != NULL)
         {
@@ -123,4 +212,6 @@ adjListGraph<TypeOfNode, TypeOfEdge>::~adjListGraph()
     delete[] verList;
 }
 
+template <class TypeOfVer, class TypeOfEdge>
+void adjListGraph<TypeOfVer, TypeOfEdge>::Prim() const;
 #endif //ADJLISTGRAPH_CPP_INCLUDED
