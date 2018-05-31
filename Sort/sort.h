@@ -124,16 +124,16 @@ void heapSort(T arr[], int size)
     }
 }
 
-template<class T>
+template <class T>
 void bubbleSort(T arr[], int size)
 {
     bool flag = true;
-    for(int i = size; flag && i > 1; i--) //size of each sort
+    for (int i = size; flag && i > 1; i--) //size of each sort
     {
         flag = false;
-        for(int j = 1; j < i; j++) // j = [1, i - 1]
+        for (int j = 1; j < i; j++) // j = [1, i - 1]
         {
-            if(arr[j] < arr[j - 1])
+            if (arr[j] < arr[j - 1])
             {
                 //cout << "swap(" << j << ", " << j - 1 <<")" << endl;
                 swap(arr, j, j - 1);
@@ -143,5 +143,46 @@ void bubbleSort(T arr[], int size)
     }
 }
 
+template <class T>
+void merge(T a[], int left, int mid, int right)
+{
+    T *tmp = new T[left - right + 1];
+    int i = left, j = mid, k = 0;
+    while (i < mid && j < right)
+    {
+        if (arr[i] < arr[j])
+            tmp[k++] = arr[i++];
+        else
+            tmp[k++] = arr[j++];
+    }
+    while (i < mid)
+    {
+        tmp[k++] = arr[i++];
+    }
+    while (j < right)
+    {
+        tmp[k++] = arr[j++];
+    }
+    for (i = 0, k = left; k <= right;)
+    {
+        arr[k++] = tmp[i++];
+    }
+}
+
+template <class T>
+void mergeSort(T arr[], int left, int right)
+{
+    if (left == right)
+        return;
+    int mid = (left + right) / 2;
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+    merge(arr, left, mid + 1, right);
+}
+template <class T>
+void mergeSort(T arr[], int size)
+{
+    mergeSort(arr, 0, size - 1);
+}
 
 #endif // SORT_H_INCLUDED
