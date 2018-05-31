@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1527774304 source:d:\victor\documents\github\data-structure\sort\main.cpp
+	<iostream>
+	"sort.h"
+
+1527774511 d:\victor\documents\github\data-structure\sort\sort.h
+	<iostream>
+
