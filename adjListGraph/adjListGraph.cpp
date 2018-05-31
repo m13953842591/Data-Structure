@@ -214,4 +214,76 @@ adjListGraph<TypeOfVer, TypeOfEdge>::~adjListGraph()
 
 template <class TypeOfVer, class TypeOfEdge>
 void adjListGraph<TypeOfVer, TypeOfEdge>::Prim() const;
+
+template <class TypeOfVer, class TypeOfEdge>
+void adjListGraph<TypeOfVer, TypeOfEdge>::Dijkstra(int start, DijkstraNode *&res)
+{
+
+    TypeOfEdge minDst;
+    DijkstraNode u;
+    priorityQueue<DijkstraNode> q;
+    edgeNode *p;
+
+    res = new DijkstraNode[Vers];
+    for (int i = 0; i < Vers; i++) //initialization
+    {
+        res[i].distance = INF;
+        res[i].node = i; //no need to change
+        res[i].known = false;
+        res[i].len = INF;
+        res[i].prev = -1;
+    }
+
+    res[start].distance = 0;
+    res[start].len = 0;
+    q.enQueue(res[start]);
+    while (!q.isEmpty())
+    {
+        u = q.deQueue();
+        if (res[u.node].known)
+            continue; //防止一个点重复加入的情况
+        res[u.node].known = true;
+        minDst = res[u.node].distance;
+
+        for (p = verList[u.node].head; p; p = p->next)
+        {
+            if (p->weight + minDst < res[p->end].distance)
+            {
+                res[p->end].distance = p->weight + minDst;
+                res[p->end].prev = u.node;
+                res[p->end].len = res[u.node].len + 1;
+                q.enQueue(res[p->end]);
+            }
+            else if (p->weight + minDst == res[p->end].distance)
+            {
+                if (res[p->end].len > res[u.node].len + 1)
+                {
+                    res[p->end].distance = p->weight + minDst;
+                    res[p->end].prev = u.node;
+                    res[p->end].len = res[u.node].len + 1;
+                    q.enQueue(res[p->end]);
+                }
+            }
+        }
+    }
+}
+
+template <class TypeOfVer, class TypeOfEdge>
+void adjListGraph<TypeOfVer, TypeOfEdge>::printPath(
+    int start, int end, DijkstraNode *&res)
+{
+    if (start == end)
+    {
+        cout << start;
+        return;
+    }
+    if (res[end].prev == -1)
+    {
+        cout << "no path from start to end" << endl;
+        return;
+    }
+    printPath(start, res[end].prev, res);
+    cout << ' ' << end;
+}
+
 #endif //ADJLISTGRAPH_CPP_INCLUDED

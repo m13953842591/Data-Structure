@@ -9,32 +9,40 @@ template <class TypeOfVer, class TypeOfEdge>
 
 class adjListGraph
 {
-private:
-
+  private:
     struct edgeNode
     {
         TypeOfEdge weight;
         int end;
-        edgeNode * next;
-        edgeNode():next(NULL){}
-        edgeNode(int e, TypeOfEdge w, edgeNode * n = NULL):
-            end(e), weight(w), next(n){}
+        edgeNode *next;
+        edgeNode() : next(NULL) {}
+        edgeNode(int e, TypeOfEdge w, edgeNode *n = NULL) : end(e), weight(w), next(n) {}
     };
 
     struct verNode
     {
         TypeOfVer value;
-        edgeNode* head;
-        verNode():head(NULL){}
-        verNode(TypeOfVer v, edgeNode *h = NULL):
-            value(v), head(h){}
+        edgeNode *head;
+        verNode() : head(NULL) {}
+        verNode(TypeOfVer v, edgeNode *h = NULL) : value(v), head(h) {}
     };
 
-    verNode * verList;
+    verNode *verList;
     int Vers, Edges;
 
-    void dfs(int v, bool visited[])const;
-public:
+    void dfs(int v, bool visited[]) const;
+
+  public:
+    struct DijkstraNode
+    {
+        int node, prev, len;
+        TypeOfEdge distance;
+        bool known;
+        bool operator<(const DijkstraNode &x)
+        {
+            return distance < x.distance;
+        }
+    };
     adjListGraph(const TypeOfVer vers[], int vSize);
     bool exist(int u, int v) const;
     bool insert(int u, int v, TypeOfEdge w);
@@ -44,6 +52,8 @@ public:
     void bfs() const;
     void Kruscal() const;
     void Prim() const;
+    void Dijkstra(int start, DijkstraNode *&res);
+    void printPath(int start, int end, DijkstraNode *&res);
     ~adjListGraph();
 };
 
@@ -52,8 +62,7 @@ struct edge
 {
     int begin, end;
     TypeOfEdge weight;
-    edge(int b, int e, TypeOfEdge w):
-        begin(b), end(e), weight(w) {}
+    edge(int b, int e, TypeOfEdge w) : begin(b), end(e), weight(w) {}
     bool operator<(const edge &e)
     {
         return weight < e.weight;

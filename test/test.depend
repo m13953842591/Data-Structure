@@ -1,5 +1,7 @@
 # depslib dependency file v1.0
-1527325744 source:d:\victor\documents\github\data-structure\test\main.cpp
+1527576003 source:d:\victor\documents\github\data-structure\test\main.cpp
 	<iostream>
 	<cstdio>
+	<queue>
+	<stack>
 

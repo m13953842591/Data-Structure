@@ -7,7 +7,7 @@ using namespace std;
 template <class Type>
 class priorityQueue
 {
-private:
+  private:
 	Type *array;
 	int currentSize;
 	int maxSize;
@@ -16,7 +16,8 @@ private:
 	void buildHeap();
 	void percolateDown(int hole);
 	void percolateUp(int hole);
-public:
+
+  public:
 	priorityQueue(int capacity = 100)
 	{
 		array = new Type[capacity];
@@ -24,11 +25,11 @@ public:
 		currentSize = 0;
 	}
 	priorityQueue(const Type *data, int size);
-	~priorityQueue(){delete array;}
-	bool isEmpty() const {return currentSize == 0;}
+	~priorityQueue() { delete array; }
+	bool isEmpty() const { return currentSize == 0; }
 	void enQueue(const Type &x);
 	Type deQueue();
-	Type getHead(){return array[1];}
+	Type getHead() { return array[1]; }
 };
 
 #include "priorityQueue.cpp"

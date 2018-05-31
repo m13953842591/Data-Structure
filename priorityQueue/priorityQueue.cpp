@@ -5,29 +5,21 @@
 template <class Type>
 void priorityQueue<Type>::doubleSpace()
 {
-	Type *tmp = array;
-	array = new Type[2 * maxSize];
+	Type *tmp = new Type[2 * maxSize];
 	for (int i = 0; i <= currentSize; ++i)
-	{
-		array[i] = tmp[i];
-	}
+		tmp[i] = array[i];
 	maxSize *= 2;
-	delete[] tmp;
+	delete[] array;
+	array = tmp;
 }
 
 template <class Type>
 void priorityQueue<Type>::percolateUp(int hole)
 {
 	Type tmp = array[hole];
-	while (hole != 1)
+	for (; hole > 1 && tmp < array[(hole >> 1)]; hole = (hole >> 1))
 	{
-		if (tmp < array[hole / 2])
-		{
-			array[hole] = array[hole / 2];
-			hole /= 2;
-		}
-		else
-			break;
+		array[hole] = array[(hole >> 1)];
 	}
 	array[hole] = tmp;
 }
