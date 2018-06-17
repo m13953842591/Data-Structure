@@ -4,6 +4,8 @@
         "stack": "cpp",
         "deque": "cpp",
         "vector": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "algorithm": "cpp",
+        "xiosbase": "cpp"
     }
 }

@@ -19,6 +19,10 @@ template <class TypeOfVer, class TypeOfEdge>
 adjListGraph<TypeOfVer, TypeOfEdge>::adjListGraph(const TypeOfVer vers[], int vSize)
 {
     verList = new verNode[vSize];
+    dst = new TypeOfEdge[vSize];
+    len = new int[vSize];
+    prev = new int[vSize];
+    EularCircuit = NULL;
     for (int i = 0; i < vSize; i++)
     {
         verList[i].value = vers[i];
@@ -54,6 +58,7 @@ bool adjListGraph<TypeOfVer, TypeOfEdge>::insert(int u, int v, TypeOfEdge w)
     ++Edges;
     return true;
 }
+
 template <class TypeOfVer, class TypeOfEdge>
 bool adjListGraph<TypeOfVer, TypeOfEdge>::remove(int u, int v)
 {
@@ -153,7 +158,8 @@ void adjListGraph<TypeOfVer, TypeOfEdge>::dfs() const
 
     for (int i = 0; i < Vers; i++)
     {
-        if (visited[i]) continue;
+        if (visited[i])
+            continue;
         dfs(i, visited);
         cout << endl;
     }
@@ -212,78 +218,84 @@ adjListGraph<TypeOfVer, TypeOfEdge>::~adjListGraph()
     delete[] verList;
 }
 
-template <class TypeOfVer, class TypeOfEdge>
-void adjListGraph<TypeOfVer, TypeOfEdge>::Prim() const;
-
-template <class TypeOfVer, class TypeOfEdge>
-void adjListGraph<TypeOfVer, TypeOfEdge>::Dijkstra(int start, DijkstraNode *&res)
+struct node
 {
-
-    TypeOfEdge minDst;
-    DijkstraNode u;
-    priorityQueue<DijkstraNode> q;
-    edgeNode *p;
-
-    res = new DijkstraNode[Vers];
-    for (int i = 0; i < Vers; i++) //initialization
+    int ver, dst;
+    bool operator<(const node &x)
     {
-        res[i].distance = INF;
-        res[i].node = i; //no need to change
-        res[i].known = false;
-        res[i].len = INF;
-        res[i].prev = -1;
+        return dst < x.dst;
     }
+    node(int v, int d) : ver(v), dst(d) {}
+};
 
-    res[start].distance = 0;
-    res[start].len = 0;
-    q.enQueue(res[start]);
+template <class TypeOfVer, class TypeOfEdge>
+void adjListGraph<TypeOfVer, TypeOfEdge>::Dijkstra(int start)
+{
+    for (int i = 0; i < Vers; i++)
+    {
+        dst[i] = INF;
+        len[i] = INF;
+    }
+    dst[start] = 0;
+    len[start] = 0;
+
+    priorityQueue<node> q;
+    q.enQueue(node(start, 0));
+    node u;
     while (!q.isEmpty())
     {
         u = q.deQueue();
-        if (res[u.node].known)
-            continue; //防止一个点重复加入的情况
-        res[u.node].known = true;
-        minDst = res[u.node].distance;
-
-        for (p = verList[u.node].head; p; p = p->next)
+        for (p = verList[u.ver].head; p; p = p->next)
         {
-            if (p->weight + minDst < res[p->end].distance)
+            if ((p->weight + u.dst < dst[p->end]) ||
+                ((p->weight + u.dst == dst[p->end]) && (len[p->end] > len[u.ver] + 1)))
             {
-                res[p->end].distance = p->weight + minDst;
-                res[p->end].prev = u.node;
-                res[p->end].len = res[u.node].len + 1;
-                q.enQueue(res[p->end]);
-            }
-            else if (p->weight + minDst == res[p->end].distance)
-            {
-                if (res[p->end].len > res[u.node].len + 1)
-                {
-                    res[p->end].distance = p->weight + minDst;
-                    res[p->end].prev = u.node;
-                    res[p->end].len = res[u.node].len + 1;
-                    q.enQueue(res[p->end]);
-                }
+                dst[p->end] = p->weight + u.dst;
+                prev[p->end] = u.ver;
+                len[p->end] = len[u.ver] + 1;
+                q.enQueue(node(p->end, dst[p->end]));
             }
         }
     }
 }
 
 template <class TypeOfVer, class TypeOfEdge>
-void adjListGraph<TypeOfVer, TypeOfEdge>::printPath(
-    int start, int end, DijkstraNode *&res)
+void adjListGraph<TypeOfVer, TypeOfEdge>::printPath(int start, int end)
 {
     if (start == end)
     {
         cout << start;
         return;
     }
-    if (res[end].prev == -1)
-    {
-        cout << "no path from start to end" << endl;
-        return;
-    }
-    printPath(start, res[end].prev, res);
+    printPath(start, prev[end]);
     cout << ' ' << end;
 }
 
+template <class TypeOfVer, class TypeOfEdge>
+void adjListGraph<TypeOfVer, TypeOfEdge>::topSort() const
+{
+    linkQueue<int> q;
+    edgeNode *p;
+    int current, *inDegree = new int[Vers];
+    for (int i = 0; i < Vers; ++i)
+        inDegree[i] = 0;
+    for (i = 0; i < Vers; ++i)
+    {
+        for (p = verList[i].head; p != NULL; p = p->next)
+            ++inDegree[p->end];
+    }
+    for (i = 0; i < Vers; ++i)
+        if (inDegree[i] == 0)
+            q.enQueue(i);
+    cout << "topSort:" << endl;
+    while (!q.isEmpty())
+    {
+        current = q.deQueue();
+        cout << verList[current].ver << '\t';
+        for (p = verList[current].head; p != NULL; p = p->next)
+            if (--inDegree[p->end] == 0)
+                q.enQueue(p->end);
+    }
+    cout << endl;
+}
 #endif //ADJLISTGRAPH_CPP_INCLUDED

@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1529227514 source:d:\victor\documents\github\data-structure\avltree\avltree.cpp
+	"AvlTree.h"
+
+1529225733 d:\victor\documents\github\data-structure\avltree\avltree.h
+	<iostream>
+	<queue>
+	"AvlTree.cpp"
+
+1529227514 d:\victor\documents\github\data-structure\avltree\avltree.cpp
+	"AvlTree.h"
+
+1529227391 source:d:\victor\documents\github\data-structure\avltree\main.cpp
+	<iostream>
+	"AvlTree.h"
+

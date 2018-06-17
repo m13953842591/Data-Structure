@@ -4,7 +4,6 @@
 #include <stack>
 #include <queue>
 using namespace std;
-
 template <class TypeOfVer, class TypeOfEdge>
 
 class adjListGraph
@@ -12,8 +11,8 @@ class adjListGraph
   private:
     struct edgeNode
     {
-        TypeOfEdge weight;
         int end;
+        TypeOfEdge weight;
         edgeNode *next;
         edgeNode() : next(NULL) {}
         edgeNode(int e, TypeOfEdge w, edgeNode *n = NULL) : end(e), weight(w), next(n) {}
@@ -26,23 +25,27 @@ class adjListGraph
         verNode() : head(NULL) {}
         verNode(TypeOfVer v, edgeNode *h = NULL) : value(v), head(h) {}
     };
+    struct EulerNode
+    {
+        int NodeNum;
+        EulerNode *next;
+        EulerNode(int ver)
+        {
+            NodeNum = ver;
+            next = NULL;
+        }
+    }
 
     verNode *verList;
     int Vers, Edges;
-
     void dfs(int v, bool visited[]) const;
-
+    EulerNode * EulerCircuit(int start, EulerNode * &end);
+    
   public:
-    struct DijkstraNode
-    {
-        int node, prev, len;
-        TypeOfEdge distance;
-        bool known;
-        bool operator<(const DijkstraNode &x)
-        {
-            return distance < x.distance;
-        }
-    };
+    TypeOfEdge *dst;
+    int *len;
+    int *prev;
+
     adjListGraph(const TypeOfVer vers[], int vSize);
     bool exist(int u, int v) const;
     bool insert(int u, int v, TypeOfEdge w);
@@ -52,8 +55,10 @@ class adjListGraph
     void bfs() const;
     void Kruscal() const;
     void Prim() const;
-    void Dijkstra(int start, DijkstraNode *&res);
-    void printPath(int start, int end, DijkstraNode *&res);
+    void Dijkstra(int start);
+    void printPath(int start, int end);
+    void EulerCircuit() const;
+    void topSort() const;
     ~adjListGraph();
 };
 
